@@ -1,0 +1,28 @@
+{
+  "name": "sisgpup",
+  "version": "1.0.0",
+  "description": "SisGPUP - Sistema de Gestão Group UP",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrunoMNoronha/sisgpup.git"
+  },
+  "author": "Bruno M Noronha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrunoMNoronha/sisgpup/issues"
+  },
+  "homepage": "https://github.com/BrunoMNoronha/sisgpup#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nunjucks": "^3.2.1",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
