@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/cadastro', function (req, res, next) {
-  res.render('pedidos-cadastro.html');
+  return res.render('pedidos-cadastro.html');
 });
 
 router.post('/store', function (req, res) {
@@ -47,19 +47,22 @@ router.post('/store', function (req, res) {
       return console.log(err);
     }
 
-    db.all(`SELECT * FROM pedidos`, function (err, rows) {
-      if (err) {
-        return console.log(err);
-      }
-      let total = rows.length;
-      return res.render('pedidos.html', { pedidos: rows, total });
-    })
+    return res.redirect('/pedidos');
   }
 
-  console.log(query);
-  console.log(values);
   db.run(query, values, afterInsertData);
+});
 
+router.get('/accept/:id', function (req, res, next) {
+  id = req.params.id;
+  db.run("UPDATE pedidos SET status = ? WHERE id = ?", "em andamento", id);
+  return res.redirect('/pedidos');
+});
+
+router.get('/end/:id', function (req, res, next) {
+  id = req.params.id;
+  db.run("UPDATE pedidos SET status = ? WHERE id = ?", "concluido", id);
+  return res.redirect('/pedidos');
 });
 
 module.exports = router;
