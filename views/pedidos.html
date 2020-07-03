@@ -101,7 +101,7 @@
         {% if pedido.status == "pendente" %}
         <a href="/pedidos/accept/{{ pedido.id }}" class="btn btn-primary">Aceitar</a>
         {% else %}
-        <a href="/pedidos/end/{{ pedido.id }}" class="btn btn-success">Concluído</a>
+        <a href="/pedidos/done/{{ pedido.id }}" class="btn btn-success">Concluído</a>
         {% endif %}
       </div>
     </div>

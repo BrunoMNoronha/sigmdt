@@ -1,68 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../database/db');
 
-router.get('/', function (req, res, next) {
+var knex = require('../database/db')
+const PedidoController = require('../controllers/PedidoController')
 
-  db.all(`SELECT * FROM pedidos`, function (err, rows) {
-    if (err) {
-      return console.log(err);
-    }
-    let total = rows.length;
-    return res.render('pedidos.html', { pedidos: rows, total });
-  })
+router.get('/', PedidoController.index);
 
-});
+router.get('/cadastro', PedidoController.cadastro);
 
-router.get('/cadastro', function (req, res, next) {
-  return res.render('pedidos-cadastro.html');
-});
+router.post('/store',  PedidoController.store);
 
-router.post('/store', function (req, res) {
-  const query = `
-  INSERT INTO pedidos (
-    data,
-    bloco,
-    apt,
-    prioridade,
-    categoria,
-    responsavel,
-    status,
-    descricao
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-`;
-  const values = [
-    req.body.date,
-    req.body.bloco,
-    req.body.apt,
-    req.body.prioridade,
-    req.body.categoria,
-    req.body.responsavel,
-    req.body.status,
-    req.body.descricao
-  ];
+router.put('/update/:id',  PedidoController.update);
 
-  function afterInsertData(err) {
-    if (err) {
-      return console.log(err);
-    }
+router.get('/accept/:id', PedidoController.accept);
 
-    return res.redirect('/pedidos');
-  }
-
-  db.run(query, values, afterInsertData);
-});
-
-router.get('/accept/:id', function (req, res, next) {
-  id = req.params.id;
-  db.run("UPDATE pedidos SET status = ? WHERE id = ?", "em andamento", id);
-  return res.redirect('/pedidos');
-});
-
-router.get('/end/:id', function (req, res, next) {
-  id = req.params.id;
-  db.run("UPDATE pedidos SET status = ? WHERE id = ?", "concluido", id);
-  return res.redirect('/pedidos');
-});
+router.get('/done/:id', PedidoController.done);
 
 module.exports = router;
