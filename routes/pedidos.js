@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var knex = require('../database/db')
 const PedidoController = require('../controllers/PedidoController')
 
 router.get('/', PedidoController.index);
