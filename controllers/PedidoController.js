@@ -3,7 +3,7 @@ var knex = require('../database/db');
 module.exports = {
 	async index(req, res) {
 		const results = await knex('pedidos');
-		return res.render('pedidos.html', { pedidos: results });
+		return res.render('pedidos/pedidos.html', { pedidos: results });
 	},
 	async store(req, res, next) {
 		try {
@@ -35,7 +35,7 @@ module.exports = {
 		return res.redirect('/pedidos');
 	},
 	async cadastro(req, res) {
-		return res.render('pedidos-cadastro.html');
+		return res.render('pedidos/pedidos-cadastro.html');
 	},
 	async accept(req, res, next) {
 		try {
