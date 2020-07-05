@@ -32,7 +32,7 @@ module.exports = {
     } catch (error) {
       console.error(error)
     }
-    return res.redirect('/seriais');
+    return res.redirect(`/seriais?id_produto=${req.body.produto_id}`);
   },
   async cadastro(req, res) {
     return res.render('seriais/seriais-cadastro.html');
