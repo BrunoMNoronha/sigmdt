@@ -6,6 +6,7 @@ var indexRouter = require('./routes/index');
 var financeiroRouter = require('./routes/financeiro');
 var pedidosRouter = require('./routes/pedidos');
 var produtosRouter = require('./routes/produtos');
+var seriaisRouter = require('./routes/seriais');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 app.use('/financeiro', financeiroRouter);
 app.use('/pedidos', pedidosRouter);
 app.use('/produtos', produtosRouter);
+app.use('/seriais', seriaisRouter);
 
 // capturando erros
 // app.use((error, req, res, next) => {

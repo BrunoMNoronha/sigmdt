@@ -36,5 +36,8 @@ module.exports = {
 	},
 	async cadastro(req, res) {
 		return res.render('produtos/produtos-cadastro.html');
+	},
+	async controleSerial(req, res) {
+		return res.render('produtos/controle-serial.html');
 	}
 }

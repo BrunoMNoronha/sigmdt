@@ -8,7 +8,7 @@ module.exports = {
 	async store(req, res, next) {
 		try {
 			await knex('pedidos')
-				.insert(req.body.descricao);
+				.insert(req.body);
 		} catch (error) {
 			next(error);
 		}
