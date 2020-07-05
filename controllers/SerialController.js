@@ -7,12 +7,18 @@ const csv = require('fast-csv');
 
 module.exports = {
   async index(req, res) {
-    return res.render('seriais/seriais.html', { id: req.query.id_produto });
+    const produto_id = req.query.id_produto;
+    if (produto_id) {
+      const results = await knex('seriais').where('produto_id', '=', produto_id);
+      if (results) {
+        return res.render('seriais/seriais.html', { seriais: results, id: produto_id });
+      }
+      return res.render('seriais/seriais.html', { seriais: '', id: produto_id });
+    }
+    const results = await knex('seriais');
+    return res.render('seriais/seriais.html', { seriais: results });
   },
   async store(req, res, next) {
-
-    console.log(req.body, req.file);
-
     try {
       fs.createReadStream(path.resolve(__dirname, '..', 'uploads', req.file.filename))
         .pipe(csv.parse({ headers: false }))
@@ -26,18 +32,7 @@ module.exports = {
     } catch (error) {
       console.error(error)
     }
-
-
-
-    return res.send('ok');
-
-    // try {
-    //   await knex('seriais')
-    //     .insert(req.body);
-    // } catch (error) {
-    //   next(error);
-    // }
-    // return res.redirect('/seriais');
+    return res.redirect('/seriais');
   },
   async cadastro(req, res) {
     return res.render('seriais/seriais-cadastro.html');

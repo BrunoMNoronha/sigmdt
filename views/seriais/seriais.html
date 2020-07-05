@@ -22,15 +22,17 @@
   <table class="table table-hover">
     <thead class="thead-dark">
       <tr>
-        <th>#</th>
+        <th class="w-20">#</th>
         <th>Serial</th>
       </tr>
     </thead>
     <tbody>
-      <tr class='thead-dark'>
-        <td>1</td>
-        <td>sadasdasd</td>
+      {% for serial in seriais %}
+      <tr>
+        <td>{{serial.id}}</td>
+        <td>{{serial.numero}}</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
