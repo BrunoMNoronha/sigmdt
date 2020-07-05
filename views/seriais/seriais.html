@@ -48,6 +48,7 @@
       </div>
       <form action="seriais/store" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
+          <input type="hidden" name="produto_id" value="{{id}}">
           <div class="form-group row">
             <label for="inputSerial" class="col-sm-4 col-form-label">Número de Série</label>
             <div class="col-sm-8">
