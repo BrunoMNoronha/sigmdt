@@ -3,6 +3,7 @@ var nunjucks = require('nunjucks');
 var path = require('path');
 
 var indexRouter = require('./routes/index');
+var financeiroRouter = require('./routes/financeiro');
 var pedidosRouter = require('./routes/pedidos');
 var produtosRouter = require('./routes/produtos');
 
@@ -23,6 +24,7 @@ nunjucks.configure('views', {
 });
 
 app.use('/', indexRouter);
+app.use('/financeiro', financeiroRouter);
 app.use('/pedidos', pedidosRouter);
 app.use('/produtos', produtosRouter);
 
