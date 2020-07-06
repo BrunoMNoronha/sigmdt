@@ -7,7 +7,7 @@ router.get('/', FinanceiroController.index);
 
 // router.get('/cadastro', PedidoController.cadastro);
 
-// router.post('/store',  PedidoController.store);
+router.post('/store',  FinanceiroController.store);
 
 // router.put('/update/:id',  PedidoController.update);
 

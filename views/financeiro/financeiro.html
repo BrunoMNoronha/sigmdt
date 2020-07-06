@@ -18,44 +18,43 @@
   <div class="card">
     <div class="card-header">TOTAL EM CAIXA</div>
     <div class="card-body">
-      <p class="card-text text-center display-3">R$ 138,20</p>
+      <p class="card-text text-center h1">R$ {{total_caixa}}</p>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header">SAÍDA</div>
+    <div class="card-header">SAÍDA DO MÊS</div>
     <div class="card-body">
-      <p class="card-text display-4 text-center">R$ 129,00</p>
+      <p class="card-text h1 text-center">R$ {{saida_mes}}</p>
     </div>
     <div class="card-footer text-center">
       <button type="button" class="btn btn-outline-danger btn-block" data-toggle="modal"
-        data-target="#entradaModal"><span data-feather="minus"></span>
+        data-target="#saidaModal"><span data-feather="minus"></span>
         Movimentação</button>
     </div>
   </div>
   <div class="card">
-    <div class="card-header">ENTRADA</div>
+    <div class="card-header">ENTRADA DO MÊS</div>
     <div class="card-body">
-      <p class="card-text display-4 text-center">R$ 90,00</p>
+      <p class="card-text h1 text-center">R$ {{entrada_mes}}</p>
     </div>
     <div class="card-footer text-center">
       <button type="button" class="btn btn-outline-success btn-block" data-toggle="modal"
-        data-target="#saidaModal"><span data-feather="plus"></span>
+        data-target="#entradaModal"><span data-feather="plus"></span>
         Movimentação</button></button>
     </div>
   </div>
   <div class="card">
     <div class="card-header">SALDO DO MÊS ANTERIOR</div>
     <div class="card-body">
-      <p class="card-text display-4 text-center">R$ 177,20</p>
+      <p class="card-text h1 text-center">R$ 177,20</p>
     </div>
   </div>
 </div>
 
 <form class="form-inline mb-3">
   <div class="input-group">
-    <label for="inputPassword6" class="mr-3">Buscar</label>
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+    <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Recipient's username"
       aria-describedby="button-addon2">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary mr-3" type="button" id="button-addon2"><span
@@ -63,7 +62,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword6">Filtrar por data de</label>
+    <label for="inputPassword6">Filtrar por data</label>
     <input type="date" id="inputPassword6" class="form-control mx-sm-3">
   </div>
   <div class="form-group">
@@ -71,10 +70,10 @@
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" max="local">
   </div>
   <div class="form-group">
-    <label for="inputPassword6">Filtrar por movimentação</label>
     <select name="" id="" class="form-control mx-sm-3">
-      <option value="">entrada</option>
-      <option value="">saida</option>
+      <option value="">-- Movimentação --</option>
+      <option value="entrada">entrada</option>
+      <option value="saida">saida</option>
     </select>
   </div>
 </form>
@@ -89,28 +88,59 @@
     </tr>
   </thead>
   <tbody>
+    {% for movimentacao in movimentacoes %}
     <tr>
-      <td>10-12-2020</td>
-      <td>entrada</td>
-      <td>R$ 139,90</td>
-      <td>G324</td>
+      <td>{{movimentacao.data}}</td>
+      <td>{{movimentacao.movimentacao}}</td>
+      <td>R$ {{movimentacao.valor}}</td>
+      <td>{{movimentacao.descricao}}</td>
     </tr>
-    <tr>
-      <td>10-12-2020</td>
-      <td>entrada</td>
-      <td>R$ 89,90</td>
-      <td>H131</td>
-    </tr>
-    <tr>
-      <td>10-12-2020</td>
-      <td>saida</td>
-      <td>R$ 26,00</td>
-      <td>Almoço</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 
 <!-- Modal Entrada -->
+<div class="modal fade" id="saidaModal" tabindex="-1" role="dialog" aria-labelledby="saidaModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="saidaModalLabel">Movimentação de saída</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="financeiro/store" method="POST">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="inputData" class="col-sm-2 col-form-label">Data</label>
+            <div class="col-sm-10">
+              <input type="date" name="data" class="form-control" id="inputData" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputValor" class="col-sm-2 col-form-label">Valor</label>
+            <div class="col-sm-10">
+              <input type="text" name="valor" class="form-control" id="inputValor" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputDescricao" class="col-sm-2 col-form-label">Descrição</label>
+            <div class="col-sm-10">
+              <input type="descricao" name="descricao" class="form-control" id="inputDescricao" required>
+            </div>
+          </div>
+          <input type="hidden" name="movimentacao" value="saida">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Saída -->
 <div class="modal fade" id="entradaModal" tabindex="-1" role="dialog" aria-labelledby="entradaModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -122,74 +152,40 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Data</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="inputDate">
+        <form action="financeiro/store" method="POST">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputData" class="col-sm-2 col-form-label">Data</label>
+              <div class="col-sm-10">
+                <input type="date" name="data" class="form-control" id="inputData" required>
+              </div>
             </div>
+            <div class="form-group row">
+              <label for="inputValor" class="col-sm-2 col-form-label">Valor</label>
+              <div class="col-sm-10">
+                <input type="text" name="valor" class="form-control" id="inputValor" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputDescricao" class="col-sm-2 col-form-label">Descrição</label>
+              <div class="col-sm-10">
+                <input type="descricao" name="descricao" class="form-control" id="inputDescricao" required>
+              </div>
+            </div>
+            <input type="hidden" name="movimentacao" value="entrada">
           </div>
-          <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Valor</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Descrição</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword">
-            </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Registrar</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
 </div>
-
-<!-- Modal Saída -->
-<div class="modal fade" id="saidaModal" tabindex="-1" role="dialog" aria-labelledby="saidaModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="saidaModalLabel">Movimentação de saída</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Data</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="inputDate">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Valor</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Descrição</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword">
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+<script>
+  var dateControl = document.querySelectorAll('input[type="date"]');
+  var todayDate = new Date().toISOString().slice(0,10);
+  dateControl.forEach(element => {
+    element.value = todayDate;
+  });
+</script>
 {% endblock content %}
