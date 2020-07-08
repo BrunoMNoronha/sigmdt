@@ -3,14 +3,15 @@ var knex = require('../database/db');
 module.exports = {
 	async index(req, res) {
 		let total_caixa = 0;
+		let saidas = 0;
 		let saida_mes = 0;
+		let entradas = 0;
 		let entrada_mes = 0;
-		const results = await knex('financeiro');
-		
-		// console.log(results)
 
 		let now = new Date();
-		var mesAtual = now.getMonth()+1;
+		let mesAtual = now.getMonth()+1;
+
+		const results = await knex('financeiro');
 		
 		if (mesAtual < 10) {
 			mesAtual = "0"+mesAtual;
@@ -18,17 +19,22 @@ module.exports = {
 
 		results.map(function(item) {
 
-			if (item.movimentacao == "saida" && item.data.includes(`-${mesAtual}-`)) {
-				 saida_mes += item.valor;
-			}
-			if (item.movimentacao == "entrada" && item.data.includes(`-${mesAtual}-`)) {
-				 entrada_mes += item.valor;
+			if (item.movimentacao == "saida") {
+				saidas += item.valor;
+				if (item.data.includes(`-${mesAtual}-`)) {
+					saida_mes += item.valor;
+				}
 			}
 
-			
+			if (item.movimentacao == "entrada") {
+				entradas += item.valor
+				if (item.data.includes(`-${mesAtual}-`)) {
+					entrada_mes += item.valor;
+				}
+			}
 		})
 
-		total_caixa = entrada_mes - saida_mes;
+		total_caixa = entradas - saidas;
 		
 		return res.render('financeiro/financeiro.html', { movimentacoes: results, saida_mes, entrada_mes, total_caixa });
 	},

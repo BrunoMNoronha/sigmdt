@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Controle de Caixa</h1>
@@ -18,7 +19,7 @@
   <div class="card">
     <div class="card-header">TOTAL EM CAIXA</div>
     <div class="card-body">
-      <p class="card-text text-center h1">R$ {{total_caixa}}</p>
+      <p class="card-text text-center display-4">R$ {{total_caixa}}</p>
     </div>
   </div>
 
@@ -44,12 +45,6 @@
         Movimentação</button></button>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">SALDO DO MÊS ANTERIOR</div>
-    <div class="card-body">
-      <p class="card-text h1 text-center">R$ 177,20</p>
-    </div>
-  </div>
 </div>
 
 <form class="form-inline mb-3">
@@ -70,7 +65,7 @@
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" max="local">
   </div>
   <div class="form-group">
-    <select name="" id="" class="form-control mx-sm-3">
+    <select name="movimentacao" id="selectMovimentacao" class="form-control mx-sm-3" onchange="selectFilter()">
       <option value="">-- Movimentação --</option>
       <option value="entrada">entrada</option>
       <option value="saida">saida</option>
@@ -89,9 +84,9 @@
   </thead>
   <tbody>
     {% for movimentacao in movimentacoes %}
-    <tr>
+    <tr id="trMovimentacao">
       <td>{{movimentacao.data}}</td>
-      <td>{{movimentacao.movimentacao}}</td>
+      <td id="tdMovimentacao">{{movimentacao.movimentacao}}</td>
       <td>R$ {{movimentacao.valor}}</td>
       <td>{{movimentacao.descricao}}</td>
     </tr>
@@ -182,10 +177,10 @@
   </div>
 </div>
 <script>
-  var dateControl = document.querySelectorAll('input[type="date"]');
-  var todayDate = new Date().toISOString().slice(0,10);
-  dateControl.forEach(element => {
-    element.value = todayDate;
-  });
+
 </script>
 {% endblock content %}
+
+{% block scripts %}
+<script src="/javascripts/financeiro.js"></script>
+{% endblock scripts %}
