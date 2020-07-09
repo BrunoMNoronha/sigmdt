@@ -3,11 +3,15 @@ Este é um Sistema de Gerenciamento Opensource.
 
 ### Recusos
 
-- Controle de Caixa
-- Cadastro de Ordens de Serviço
-- Cadastro de Produtos
-	- Controle de Serial
-	- Importação de CSV
+- Financeiro
+	- Fluxo de caixa
+- Tickets
+	- Cadastro de tickets
+- Produtos
+	- Cadastro de produtos
+	- Controle de serial
+- Clientes
+	- Cadastro de clientes
 
 ### Tecnologias
 - Node.js
