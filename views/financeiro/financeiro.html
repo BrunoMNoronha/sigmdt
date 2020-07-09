@@ -29,8 +29,8 @@
       <p class="card-text h1 text-center">R$ {{saida_mes}}</p>
     </div>
     <div class="card-footer text-center">
-      <button type="button" class="btn btn-outline-danger btn-block" data-toggle="modal"
-        data-target="#saidaModal"><span data-feather="minus"></span>
+      <button type="button" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#saidaModal"><span
+          data-feather="minus"></span>
         Movimentação</button>
     </div>
   </div>
@@ -48,29 +48,31 @@
 </div>
 
 <form class="form-inline mb-3">
-  <div class="input-group">
+    <div class="form-group">
+      <input type="date" id="dataMin" class="form-control mx-sm-3">
+      <label for="dataMax">até</label>
+      <input type="date" id="dataMax" class="form-control mx-sm-3">
+    </div>
+
+  <div class="form-group">
+    <select name="movimentacao" id="selectMovimentacoes" class="form-control mx-sm-3">
+      <option value="">Exibir todas movimentações</option>
+      <option value="entrada">Apenas entradas</option>
+      <option value="saida">Apenas saidas</option>
+    </select>
+  </div>
+
+  <button type="button" class="btn btn-primary form-control mx-sm-3" onclick="dateFilter()">Filtrar</button>
+
+
+  <!-- <div class="input-group">
     <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Recipient's username"
       aria-describedby="button-addon2">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary mr-3" type="button" id="button-addon2"><span
           data-feather="search"></span></button>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword6">Filtrar por data</label>
-    <input type="date" id="inputPassword6" class="form-control mx-sm-3">
-  </div>
-  <div class="form-group">
-    <label for="inputPassword6">até</label>
-    <input type="date" id="inputPassword6" class="form-control mx-sm-3" max="local">
-  </div>
-  <div class="form-group">
-    <select name="movimentacao" id="selectMovimentacao" class="form-control mx-sm-3" onchange="selectFilter()">
-      <option value="">-- Movimentação --</option>
-      <option value="entrada">entrada</option>
-      <option value="saida">saida</option>
-    </select>
-  </div>
+  </div> -->
 </form>
 
 <table class="table">
@@ -84,9 +86,9 @@
   </thead>
   <tbody>
     {% for movimentacao in movimentacoes %}
-    <tr id="trMovimentacao">
+    <tr id="trMovimentacoes">
       <td>{{movimentacao.data}}</td>
-      <td id="tdMovimentacao">{{movimentacao.movimentacao}}</td>
+      <td>{{movimentacao.movimentacao}}</td>
       <td>R$ {{movimentacao.valor}}</td>
       <td>{{movimentacao.descricao}}</td>
     </tr>
@@ -173,14 +175,14 @@
             <button type="submit" class="btn btn-primary">Registrar</button>
           </div>
         </form>
+      </div>
     </div>
   </div>
-</div>
-<script>
+  <script>
 
-</script>
-{% endblock content %}
+  </script>
+  {% endblock content %}
 
-{% block scripts %}
-<script src="/javascripts/financeiro.js"></script>
-{% endblock scripts %}
+  {% block scripts %}
+  <script src="/javascripts/financeiro.js"></script>
+  {% endblock scripts %}
