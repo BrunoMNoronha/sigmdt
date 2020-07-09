@@ -12,7 +12,7 @@ module.exports = {
 		let mesAtual = now.getMonth()+1;
 		let anoAtual = now.getFullYear();
 
-		const results = await knex('financeiro');
+		const results = await knex('financeiro').orderBy('data', 'desc');
 		
 		if (mesAtual < 10) {
 			mesAtual = "0"+mesAtual;
