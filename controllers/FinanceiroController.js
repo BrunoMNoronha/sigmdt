@@ -10,6 +10,7 @@ module.exports = {
 
 		let now = new Date();
 		let mesAtual = now.getMonth()+1;
+		let anoAtual = now.getFullYear();
 
 		const results = await knex('financeiro');
 		
@@ -21,14 +22,14 @@ module.exports = {
 
 			if (item.movimentacao == "saida") {
 				saidas += item.valor;
-				if (item.data.includes(`-${mesAtual}-`)) {
+				if (item.data.includes(`${anoAtual}-${mesAtual}-`)) {
 					saida_mes += item.valor;
 				}
 			}
 
 			if (item.movimentacao == "entrada") {
 				entradas += item.valor
-				if (item.data.includes(`-${mesAtual}-`)) {
+				if (item.data.includes(`${anoAtual}-${mesAtual}-`)) {
 					entrada_mes += item.valor;
 				}
 			}
