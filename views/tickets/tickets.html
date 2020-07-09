@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Pedidos</h1>{{pedidos|length}}
+  <h1 class="h2">Tickets</h1>{{tickets|length}}
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -14,7 +14,7 @@
   </div>
 </div>
 <div>
-  <a class="btn btn-primary mb-3" href="/pedidos/cadastro">Criar novo</a>
+  <a class="btn btn-primary mb-3" href="/tickets/cadastro">Criar novo</a>
 </div>
 
 <div class="table-responsive">
@@ -31,16 +31,16 @@
       </tr>
     </thead>
     <tbody>
-      {% for pedido in pedidos %}
-      {% if pedido.status != "concluido" %}
-      <tr data-toggle="modal" data-id="{{ pedido.id }}" data-target="#modal-{{ pedido.id }}">
-        <td>{{ pedido.id }}</td>
-        <td>{{ pedido.data }}</td>
-        <td>{{ pedido.bloco }}{{ pedido.apt }}</td>
-        <td>{{ pedido.categoria }}</td>
-        <td>{{ pedido.responsavel }}</td>
-        <td><span id="span-prioridade" class="badge badge-success">{{ pedido.prioridade }}</span></td>
-        <td>{{ pedido.status }}</td>
+      {% for ticket in tickets %}
+      {% if ticket.status != "concluido" %}
+      <tr data-toggle="modal" data-id="{{ ticket.id }}" data-target="#modal-{{ ticket.id }}">
+        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.data }}</td>
+        <td>{{ ticket.bloco }}{{ ticket.apt }}</td>
+        <td>{{ ticket.categoria }}</td>
+        <td>{{ ticket.responsavel }}</td>
+        <td><span id="span-prioridade" class="badge badge-success">{{ ticket.prioridade }}</span></td>
+        <td>{{ ticket.status }}</td>
         </td>
       </tr>
       {% endif %}
@@ -66,14 +66,14 @@
     </thead>
     <tbody>
 
-      {% for pedido in pedidos %}
-      {% if pedido.status == "concluido" %}
-      <tr data-toggle="modal" data-id="{{ pedido.id }}" data-target="#modal-{{ pedido.id }}">
-        <td>{{ pedido.id }}</td>
-        <td>{{ pedido.data }}</td>
-        <td>{{ pedido.bloco }}{{ pedido.apt }}</td>
-        <td>{{ pedido.categoria }}</td>
-        <td>{{ pedido.responsavel }}</td>
+      {% for ticket in tickets %}
+      {% if ticket.status == "concluido" %}
+      <tr data-toggle="modal" data-id="{{ ticket.id }}" data-target="#modal-{{ ticket.id }}">
+        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.data }}</td>
+        <td>{{ ticket.bloco }}{{ ticket.apt }}</td>
+        <td>{{ ticket.categoria }}</td>
+        <td>{{ ticket.responsavel }}</td>
         </td>
       </tr>
       {% endif %}
@@ -83,25 +83,25 @@
 </div>
 
 <!-- Modal -->
-{% for pedido in pedidos %}
-<div class="modal fade" id="modal-{{ pedido.id }}" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"
+{% for ticket in tickets %}
+<div class="modal fade" id="modal-{{ ticket.id }}" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="TituloModalCentralizado">Detalhes {{ pedido.id }}</h5>
+        <h5 class="modal-title" id="TituloModalCentralizado">Detalhes {{ ticket.id }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ pedido.descricao }}</p>
+        <p>{{ ticket.descricao }}</p>
       </div>
       <div class="modal-footer">
-        {% if pedido.status == "pendente" %}
-        <a href="/pedidos/accept/{{ pedido.id }}" class="btn btn-primary">Aceitar</a>
+        {% if ticket.status == "pendente" %}
+        <a href="/tickets/accept/{{ ticket.id }}" class="btn btn-primary">Aceitar</a>
         {% else %}
-        <a href="/pedidos/done/{{ pedido.id }}" class="btn btn-success">Concluído</a>
+        <a href="/tickets/done/{{ ticket.id }}" class="btn btn-success">Concluído</a>
         {% endif %}
       </div>
     </div>

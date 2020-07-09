@@ -4,7 +4,7 @@ var path = require('path');
 
 var indexRouter = require('./routes/index');
 var financeiroRouter = require('./routes/financeiro');
-var pedidosRouter = require('./routes/pedidos');
+var ticketsRouter = require('./routes/tickets');
 var produtosRouter = require('./routes/produtos');
 var seriaisRouter = require('./routes/seriais');
 var clientesRouter = require('./routes/clientes');
@@ -27,7 +27,7 @@ nunjucks.configure('views', {
 
 app.use('/', indexRouter);
 app.use('/financeiro', financeiroRouter);
-app.use('/pedidos', pedidosRouter);
+app.use('/tickets', ticketsRouter);
 app.use('/produtos', produtosRouter);
 app.use('/seriais', seriaisRouter);
 app.use('/clientes', clientesRouter);

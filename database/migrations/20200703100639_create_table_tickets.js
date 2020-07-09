@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('pedidos', function(table) {
+  return knex.schema.createTable('tickets', function(table) {
       table.increments('id')
       table.text('data')
       table.text('bloco')
@@ -16,5 +16,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('pedidos')
+  return knex.schema.dropTable('tickets')
 };
