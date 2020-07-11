@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Produtos</h1>{{produtos|length}}
+  <h1 class="h2">Produtos</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -14,7 +14,9 @@
   </div>
 </div>
 <div>
-  <a class="btn btn-primary mb-3" href="/produtos/cadastro">Criar novo</a>
+  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro">Adicionar novo produto</a>
+  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro">Adicionar nova categoria</a>
+
 </div>
 
 <div class="table-responsive">
@@ -112,12 +114,17 @@
           </tbody>
         </table>
       </div>
-      <div class="modal-footer">
-        <a href="/seriais?id_produto={{ produto.id }}" class="btn btn-primary">Controle de Serial</a>
+      <div class="modal-footer d-flex justify-content-between">
+        <div>
+          <a class="btn btn-outline-secondary" href="/produtos/cadastro">Editar</a>
+          <a class="btn btn-outline-secondary" href="/produtos/cadastro">Excluir</a>
+        </div>
+        <div>
+          <a href="/seriais?id_produto={{ produto.id }}" class="btn btn-outline-primary">Controle de Serial</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 {% endfor %}
 

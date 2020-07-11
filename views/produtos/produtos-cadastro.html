@@ -6,8 +6,23 @@
   <h1 class="h2">Cadastrar novo produto</h1>
 </div>
 
-<div>
-  <form action="/produtos/store" method="POST">
+<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="produto-tab" data-toggle="tab" href="#produto" role="tab" aria-controls="produto"
+      aria-selected="true">Produto</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="categoria-tab" data-toggle="tab" href="#categoria" role="tab" aria-controls="categoria"
+      aria-selected="false">Categoria</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="fornecedor-tab" data-toggle="tab" href="#fornecedor" role="tab" aria-controls="fornecedor"
+      aria-selected="false">Fornecedor</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="produto" role="tabpanel" aria-labelledby="produto-tab">
+    <form action="/produtos/store" method="POST">
       <div class="form-row">
         <div class="form-group col-md-2">
           <label for="inputCodigo">Codigo</label>
@@ -70,9 +85,15 @@
           <textarea name="observacao" class="form-control" id="textarea" rows="3"></textarea>
         </div>
       </div>
-      
+
       <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
+    </form>
+  </div>
+
+  <div class="tab-pane fade" id="categoria" role="tabpanel" aria-labelledby="categoria-tab">
+    tesste
+  </div>
+  <div class="tab-pane fade" id="fornecedor" role="tabpanel" aria-labelledby="contact-tab">...</div>
 </div>
 
 {% endblock content %}
