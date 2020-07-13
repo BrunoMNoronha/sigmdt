@@ -139,21 +139,9 @@
   </div>
   <div class="tab-pane fade" id="fornecedor" role="tabpanel" aria-labelledby="contact-tab">...</div>
 </div>
-
-<script>
-  window.onload = function(){  
-  
-  var url = document.location.toString();
-  console.log(url)
-  if (url.match('#')) {
-      $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-  }
-  
-  //Change hash for page-reload
-  $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').on('shown', function (e) {
-      window.location.hash = e.target.hash;
-  }); 
-  } 
-  </script>
 {% endblock content %}
 
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/cep-promise/dist/cep-promise.min.js"></script>
+<script src="javascripts/produtos-cadastro.js"></script>
+{% endblock scripts %}
