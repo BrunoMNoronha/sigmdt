@@ -8,6 +8,7 @@ var ticketsRouter = require('./routes/tickets');
 var produtosRouter = require('./routes/produtos');
 var seriaisRouter = require('./routes/seriais');
 var clientesRouter = require('./routes/clientes');
+var categoriasRouter = require('./routes/categorias');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', indexRouter);
 app.use('/financeiro', financeiroRouter);
 app.use('/tickets', ticketsRouter);
 app.use('/produtos', produtosRouter);
+app.use('/categorias', categoriasRouter);
 app.use('/seriais', seriaisRouter);
 app.use('/clientes', clientesRouter);
 

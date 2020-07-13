@@ -14,8 +14,9 @@
   </div>
 </div>
 <div>
-  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro">Adicionar novo produto</a>
-  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro">Adicionar nova categoria</a>
+  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro">Adicionar novo</a>
+  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro#categoria">Categoria</a>
+  <a class="btn btn-outline-secondary mb-3" href="/produtos/cadastro#fornecedor">Fornecedor</a>
 
 </div>
 
@@ -33,6 +34,7 @@
       </tr>
     </thead>
     <tbody>
+      {% if protudos|length > 0 %}
       {% for produto in produtos %}
       <tr data-toggle="modal" data-id="{{ produto.id }}" data-target="#modal-{{ produto.id }}">
         <td>{{produto.codigo}}</td>
@@ -44,11 +46,46 @@
         <td>{{produto.estoque_atual}}</td>
       </tr>
       {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="7">
+            nenhum produto cadastrado
+        </td>
+      </tr>
+      {% endif %}
     </tbody>
   </table>
 </div>
 
-<!-- Modal -->
+<!-- Modal Categoria -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline">
+          <div class="form-group mx-sm-3">
+            <label for="categoria" class="sr-only">Password</label>
+            <input type="text" class="form-control" id="categoria" placeholder="Nova categoria">
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Produtos -->
 {% for produto in produtos %}
 <div class="modal fade" id="modal-{{ produto.id }}" tabindex="-1" role="dialog"
   aria-labelledby="TituloModalCentralizado" aria-hidden="true">

@@ -35,7 +35,9 @@ module.exports = {
 		return res.redirect('/produtos');
 	},
 	async cadastro(req, res) {
-		return res.render('produtos/produtos-cadastro.html');
+		const categorias = await knex('produtos_categorias');
+
+		return res.render('produtos/produtos-cadastro.html', { categorias });
 	},
 	async controleSerial(req, res) {
 		return res.render('produtos/controle-serial.html');
