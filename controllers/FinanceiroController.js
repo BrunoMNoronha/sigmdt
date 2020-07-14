@@ -36,13 +36,10 @@ module.exports = {
 		})
 
 		total_caixa = entradas - saidas;
-
 		const totalCaixaFormatado = total_caixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		const entradaCaixaFormatado = entrada_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		const saidaCaixaFormatado = saida_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		
-		results.map()
-
 		return res.render('financeiro/financeiro.html', { movimentacoes: results, saida_mes: saidaCaixaFormatado, entrada_mes: entradaCaixaFormatado, total_caixa: totalCaixaFormatado});
 	},
 	async store(req, res, next) {
