@@ -4,7 +4,7 @@ exports.up = function (knex) {
       table.increments('id')
       table.date('data')
       table.text('movimentacao')
-      table.decimal('valor',[2])
+      table.decimal('valor')
       table.text('descricao')
       table.timestamps(true, true)
     })

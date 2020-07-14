@@ -36,13 +36,25 @@ module.exports = {
 		})
 
 		total_caixa = entradas - saidas;
+
+		const totalCaixaFormatado = total_caixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+		const entradaCaixaFormatado = entrada_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+		const saidaCaixaFormatado = saida_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		
-		return res.render('financeiro/financeiro.html', { movimentacoes: results, saida_mes, entrada_mes, total_caixa });
+		results.map()
+
+		return res.render('financeiro/financeiro.html', { movimentacoes: results, saida_mes: saidaCaixaFormatado, entrada_mes: entradaCaixaFormatado, total_caixa: totalCaixaFormatado});
 	},
 	async store(req, res, next) {
+		var novoValor = req.body.valor.replace('R$ ', '').replace('.', '').replace(',', '.');
 		try {
 			await knex('financeiro')
-				.insert(req.body);
+				.insert({
+					data: req.body.data,
+					valor: novoValor,
+					descricao: req.body.descricao,
+					movimentacao: req.body.movimentacao
+				});
 		} catch (error) {
 			next(error);
 		}

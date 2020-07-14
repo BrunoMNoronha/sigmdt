@@ -1,9 +1,33 @@
-var dateControl = document.querySelectorAll('input[type="date"]');
-var todayDate = new Date().toISOString().slice(0, 10);
-dateControl.forEach(element => {
-    element.value = todayDate;
-    element.setAttribute('max',todayDate)
+$(document).ready(function () {
+    mascaraInputValor("#inputValorEntrada");
+    mascaraInputValor("#inputValorSaida");
+    verificaSaldoNegativo();
+    iniciaDataAtual();
 });
+
+function mascaraInputValor(input) {
+    $(input).maskMoney({
+        prefix: "R$ ",
+        decimal: ",",
+        thousands: "."
+    });
+}
+
+function iniciaDataAtual() {
+    var dateControl = document.querySelectorAll('input[type="date"]');
+    var todayDate = new Date().toISOString().slice(0, 10);
+    dateControl.forEach(element => {
+        element.value = todayDate;
+        element.setAttribute('max', todayDate);
+    });
+}
+
+function verificaSaldoNegativo() {
+    var inputTotalCaixa = $('#total-caixa');
+    if (inputTotalCaixa["0"].textContent.includes('-')) {
+        inputTotalCaixa.addClass('text-danger');
+    }
+}
 
 function dateFilter() {
     var tr = document.querySelectorAll('#trMovimentacoes');
