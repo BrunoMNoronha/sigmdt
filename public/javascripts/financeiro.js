@@ -14,7 +14,7 @@ function mascaraInputValor(input) {
 }
 
 function iniciaDataAtual() {
-    var dateControl = document.querySelectorAll('input[type="date"]');
+    var dateControl = document.querySelectorAll('#inputData');
     var todayDate = new Date().toISOString().slice(0, 10);
     dateControl.forEach(element => {
         element.value = todayDate;

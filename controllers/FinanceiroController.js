@@ -1,24 +1,38 @@
 var knex = require('../database/db');
+const { join } = require('../database/db');
 
 module.exports = {
 	async index(req, res) {
-		let total_caixa = 0;
+		let totalCaixa = 0;
 		let saidas = 0;
 		let saida_mes = 0;
 		let entradas = 0;
 		let entrada_mes = 0;
 
-		let now = new Date();
-		let mesAtual = now.getMonth()+1;
+		const now = new Date();
+		let diaAtual = now.getDay();
+		let mesAtual = now.getMonth() + 1;
 		let anoAtual = now.getFullYear();
 
-		const results = await knex('financeiro').orderBy('data', 'desc');
-		
-		if (mesAtual < 10) {
-			mesAtual = "0"+mesAtual;
+		const hoje = anoAtual + '-' + mesAtual + '-' + diaAtual;
+		const { dataMin = '2020-01-01', dataMax = hoje, tipoMovimentacao } = req.body;
+
+		if (tipoMovimentacao) {
+			var select = await knex('financeiro').orderBy('data', 'desc')
+				.whereBetween('data', [dataMin, dataMax])
+				.where('movimentacao', tipoMovimentacao);
+		} else {
+			var select = await knex('financeiro').orderBy('data', 'desc')
+				.whereBetween('data', [dataMin, dataMax])
 		}
 
-		results.map(function(item) {
+		const results = await knex('financeiro')
+
+		if (mesAtual < 10) {
+			mesAtual = "0" + mesAtual;
+		}
+
+		results.map(function (item) {
 
 			if (item.movimentacao == "saida") {
 				saidas += item.valor;
@@ -35,12 +49,12 @@ module.exports = {
 			}
 		})
 
-		total_caixa = entradas - saidas;
-		const totalCaixaFormatado = total_caixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+		totalCaixa = entradas - saidas;
+		const totalCaixaFormatado = totalCaixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		const entradaCaixaFormatado = entrada_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 		const saidaCaixaFormatado = saida_mes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-		
-		return res.render('financeiro/financeiro.html', { movimentacoes: results, saida_mes: saidaCaixaFormatado, entrada_mes: entradaCaixaFormatado, total_caixa: totalCaixaFormatado});
+
+		return res.render('financeiro/financeiro.html', { movimentacoes: select, saida_mes: saidaCaixaFormatado, entrada_mes: entradaCaixaFormatado, total_caixa: totalCaixaFormatado });
 	},
 	async store(req, res, next) {
 		var novoValor = req.body.valor.replace('R$ ', '').replace('.', '').replace(',', '.');

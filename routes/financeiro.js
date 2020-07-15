@@ -5,6 +5,8 @@ const FinanceiroController = require('../controllers/FinanceiroController')
 
 router.get('/', FinanceiroController.index);
 
+router.post('/', FinanceiroController.index);
+
 // router.get('/cadastro', PedidoController.cadastro);
 
 router.post('/store',  FinanceiroController.store);
