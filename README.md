@@ -39,10 +39,10 @@ $ cd sigmdt
 $ npm install
 
 # Run Migrates
-$ npx knex:migrate
+$ npx knex migrate:latest
 
 # Run Seeds
-$ ppx knex:seed
+$ npx knex seed:run
 
 # Start server
 $ npm run start
