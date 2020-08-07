@@ -1,4 +1,4 @@
-# SisGPUP - Sistema de Gerencimento Group UP
+# SisMdT - Sistema de Gerencimento Maravilhas da Terra
 Este é um Sistema de Gerenciamento Opensource.
 
 ### Recusos
