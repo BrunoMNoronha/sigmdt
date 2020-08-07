@@ -1,7 +1,7 @@
 {
-  "name": "sisgpup",
+  "name": "matthaios",
   "version": "1.0.0",
-  "description": "SisGPUP - Sistema de Gestão Group UP",
+  "description": "Matthaios - Sistema de Gestão Open Source",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",

@@ -1,5 +1,5 @@
-# SiGMdT - Sistema de Gerencimento Maravilhas da Terra
-Este é um Sistema de Gerenciamento Opensource.
+# Matthaios
+Este é um Sistema de Gestão Open Source.
 
 ### Recusos
 
