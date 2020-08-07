@@ -29,25 +29,25 @@ Este é um Sistema de Gestão Open Source.
 
 ### Instalação 
 ```bash
-# Clonar este repositório
-$ git clone https://github.com/BrunoMNoronha/sigmdt.git
+# Clonar o repositório
+$ git clone https://github.com/BrunoMNoronha/matthaios.git
 
-# Entre no repositório
-$ cd sigmdt
+# Entrar no repositório
+$ cd matthaios
 
-# Instalar dependências
+# Instalar as dependências
 $ npm install
 
-# Run Migrates
+# Atualizar o banco de dados
 $ npx knex migrate:latest
 
-# Run Seeds
+# Alimentar o banco de dados
 $ npx knex seed:run
 
-# Start server
+# Iniciar o servidor
 $ npm run start
 
-# running on port 3131
+# Rodando na porta 3131
 `http://localhost:3131`
 ```
 
@@ -58,6 +58,6 @@ $ npm run start
 - Faça um push para o seu branch: git push origin my-feature.
 
 ### 📝 Licença
-This project is under the MIT license. See the [LICENSE](https://github.com/DanielObara/NLW-1.0/blob/master/LICENSE) for details.
+Este é um projeto de código aberto
 
-Made with ♥ by Bruno Menezes Noronha 👋 [Get in touch!](https://www.linkedin.com/in/brunomnoronha/)
+Desenvolvido com ♥ by Bruno Menezes Noronha 👋 [Get in touch!](https://www.linkedin.com/in/brunomnoronha/)
