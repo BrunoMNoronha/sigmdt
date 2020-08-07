@@ -30,10 +30,10 @@ Este é um Sistema de Gerenciamento Opensource.
 ### Instalação 
 ```bash
 # Clonar este repositório
-$ git clone https://github.com/BrunoMNoronha/sisgpup.git
+$ git clone https://github.com/BrunoMNoronha/sigmdt.git
 
 # Entre no repositório
-$ cd nlw-booster-serve
+$ cd sigmdt
 
 # Instalar dependências
 $ npm install
