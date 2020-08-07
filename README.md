@@ -1,4 +1,4 @@
-# SisMdT - Sistema de Gerencimento Maravilhas da Terra
+# SiGMdT - Sistema de Gerencimento Maravilhas da Terra
 Este é um Sistema de Gerenciamento Opensource.
 
 ### Recusos
